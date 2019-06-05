@@ -1,0 +1,15 @@
+env:
+  browser: true
+  es6: true
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: "module"
+extends: "standard"
+rules:
+  brace-style: 1
+  comma-dangle: ["error", "always-multiline"]
+  indent: ["error", 2]
+  no-console: 0
+  no-unused-vars: 1
+  quotes: ["error", "single"]
+  semi: ["error", "never"]

@@ -1,0 +1,15 @@
+// Navbar
+.navbar {
+  background: $primary;
+  color: $lightest;
+  height: $navbar-height;
+  padding: 0 $app-padding;
+}
+
+// Brand
+.brand {
+  color: $lightest;
+  line-height: $navbar-height;
+  margin: 0;
+  text-align: center;
+}

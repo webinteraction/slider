@@ -1,0 +1,126 @@
+// Buttons
+.btn,
+button {
+  background: $dark;
+  border: 0;
+  border-radius: $radius;
+  box-shadow: inset 0 ($radius * -1) 0 transparentize($darkest, .9);
+  color: $lightest;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1.125em;
+  font-weight: 200;
+  height: $btn-size;
+  line-height: $btn-size;
+  padding: 0 1em;
+  position: relative;
+  text-decoration: none;
+  text-shadow: $text-shadow;
+  transition: background-color $t ease, box-shadow $t ease, transform $t ease;
+
+  &:focus,
+  &:hover {
+    background-color: darken($dark, 3%);
+    color: $lightest;
+  }
+
+  &:active {
+    box-shadow: inset 0 -1px 0 transparentize($darkest, .85);
+    transform: scale(.98);
+  }
+
+  // Button styles
+  &.lighter {
+    background-color: $lighter;
+    box-shadow: inset 0 ($radius * -1) 0 transparentize($darkest, .94);
+    color: $medium;
+
+    &:focus,
+    &:hover {
+      background-color: darken($lighter, 3%);
+    }
+  }
+
+  &.light {
+    background-color: $light;
+    color: $dark;
+
+    &:focus,
+    &:hover {
+      background-color: darken($light, 3%);
+    }
+  }
+
+  &.medium {
+    background-color: $medium;
+
+    &:focus,
+    &:hover {
+      background-color: darken($medium, 3%);
+    }
+  }
+
+  &.info {
+    background-color: $info;
+
+    &:focus,
+    &:hover {
+      background-color: darken($info, 3%);
+    }
+  }
+
+  &.danger {
+    background-color: $danger;
+
+    &:focus,
+    &:hover {
+      background-color: darken($danger, 3%);
+    }
+  }
+
+  &.success {
+    background-color: $success;
+
+    &:focus,
+    &:hover {
+      background-color: darken($success, 3%);
+    }
+  }
+
+  &.warning {
+    background-color: $warning;
+
+    &:focus,
+    &:hover {
+      background-color: darken($warning, 3%);
+    }
+  }
+
+  &.primary {
+    background-color: $primary;
+
+    &:focus,
+    &:hover {
+      background-color: darken($primary, 3%);
+    }
+  }
+
+  &.pill {
+    border-radius: $btn-size / 2;
+    padding: 0 ($btn-size / 2);
+  }
+
+  &[disabled] {
+    background-color: lighten($light, 10%);
+    box-shadow: inset 0 ($radius * -1) 0 transparentize($darkest, .97);
+    color: $medium;
+    cursor: auto;
+    text-shadow: none;
+
+    &:focus,
+    &:hover {
+      background-color: lighten($light, 10%);
+    }
+  }
+}

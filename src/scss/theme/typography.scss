@@ -1,0 +1,81 @@
+// Typography
+body {
+  background: $lightest;
+  color: $darker;
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+// Links
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: $primary;
+  transition: color $t ease;
+
+  &:focus,
+  &:hover {
+    color: $primary;
+  }
+}
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $darkest;
+  line-height: 1.2;
+  margin: 0 0 .2em;
+}
+
+h1 {
+  font-size: 1.75em;
+  font-weight: 200;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.125em;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+h6 {
+  color: $medium;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+// Paragraphs
+p {
+  margin: 0 0 ($line-height * 1em);
+}
+
+// Horizontal rules
+hr {
+  border: 0;
+  border-top: 1px solid $lighter;
+  height: 0;
+  margin: ($line-height * 1em) 0;
+
+  &.light {
+    border-top-color: transparentize($lightest, .9);
+  }
+}
