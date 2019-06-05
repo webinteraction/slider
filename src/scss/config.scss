@@ -1,0 +1,42 @@
+// Colors
+$lightest: #fff;
+$lighter: #f0f5f5;
+$light: #b2bcbd;
+$medium: #868e8f;
+$dark: #3f4243;
+$darker: #1e1f1f;
+$darkest: #000;
+$info: #2eb2d0;
+$danger: #cd2e38;
+$success: #49d37c;
+$warning: #f9b746;
+$primary: $info;
+
+// Typography
+$font-size: 16px;
+$font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$line-height: 1.4;
+
+// Styles
+$radius: 4px;
+$text-shadow: 1px 1px 0 transparentize($darkest, .8);
+$box-shadow: 0 2px 4px transparentize($darkest, .9);
+
+// Buttons
+$btn-size: 50px;
+
+// Layout
+$navbar-height: 60px;
+$app-padding: 0;
+$app-width: 800px;
+$app-height: 600px;
+
+// Effect timings
+$t: .3s;
+
+// Responsive
+$screen-xs: 320px;
+$screen-sm: 480px;
+$screen-md: 768px;
+$screen-lg: 960px;
+$screen-xl: 1200px;

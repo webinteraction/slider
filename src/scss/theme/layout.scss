@@ -1,0 +1,34 @@
+// Box model
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Body
+body {
+  margin: 0;
+}
+
+// App container
+.app-container {
+  background: $lighter;
+  display: grid;
+  min-height: 100vh;
+}
+
+// App
+.app-frame {
+  background: $lightest;
+  box-shadow: $box-shadow;
+  height: $app-height;
+  margin: auto;
+  overflow: auto;
+  position: relative;
+  width: $app-width;
+}
+
+// Page
+.page {
+  padding: $app-padding;
+}
