@@ -1,1 +1,55 @@
 // Slider
+.slider {
+  background: $darker;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slides {
+  display: flex;
+  left: 0%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transition: left $t ease;
+  width: 300%;
+}
+
+.slide {
+  position: relative;
+  text-shadow: 0 2px 4px transparentize($darkest, .6);
+}
+
+.slide-image {
+  display: block;
+  opacity: .5;
+  width: 100%;
+}
+
+.slide-title {
+  color: $lightest;
+  font-size: 4em;
+  left: 0;
+  margin: 0;
+  padding: 50px 50px 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+}
+
+.slide-content {
+  bottom: 0;
+  color: $lightest;
+  left: 0;
+  padding: 0 50px 50px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+
+  p {
+    font-size: 1.25em;
+    font-weight: 200;
+  }
+}
