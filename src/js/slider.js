@@ -38,6 +38,11 @@ export class Slider {
       sliderContainer: null,
     }
 
+    // Set slider width
+    document.querySelectorAll(`[${this.config.attr}]`).forEach(slider => {
+      this.setSliderWidth(slider)
+    })
+
     // Event listeners
     document.addEventListener('click', e => this.click(e))
   }
@@ -93,6 +98,15 @@ export class Slider {
 
     // Round to nearest index
     return Math.round(left / 100)
+  }
+
+  /**
+   * Set width of slider based on child count
+   * @param {HTMLElement} slider - Slider element
+   * @return {void}
+   */
+  setSliderWidth (slider) {
+    slider.style.width = `${slider.childElementCount * 100}%`
   }
 
   /**
