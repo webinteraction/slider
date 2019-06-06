@@ -14,6 +14,7 @@ export class Slider {
       onSlide: (state) => {},
       slider: '.slides',
       sliderContainer: '.slider',
+      threshold: 20,
     }, options)
 
     // Initialize component
@@ -36,6 +37,10 @@ export class Slider {
       length: 0,
       slider: null,
       sliderContainer: null,
+      start: undefined,
+      swiping: false,
+      swipingDistance: 0,
+      width: undefined,
     }
 
     // Set slider width
@@ -45,6 +50,9 @@ export class Slider {
 
     // Event listeners
     document.addEventListener('click', e => this.click(e))
+    document.addEventListener('touchstart', e => this.touchStart(e))
+    document.addEventListener('touchmove', e => this.touchMove(e))
+    document.addEventListener('touchend', e => this.touchEnd(e))
   }
 
   /**
@@ -60,7 +68,10 @@ export class Slider {
     else if (this.state.index >= this.state.length) this.state.index = this.state.length - 1
 
     // Set left position of slider
-    this.state.slider.style.left = `${this.state.index * -100}%`
+    this.state.slider.style.left = `${(this.state.index * -100) + this.swipingDistancePercentage()}%`
+
+    // Set classes
+    this.state.slider.classList[this.state.swiping ? 'add' : 'remove']('swiping')
 
     // Fire onSlide event
     this.config.onSlide(this.state)
@@ -85,6 +96,9 @@ export class Slider {
 
     // Get current slider index
     this.state.index = this.getSlideIndex()
+
+    // Measure slider width
+    this.state.width = this.state.sliderContainer.getBoundingClientRect().width
   }
 
   /**
@@ -110,6 +124,31 @@ export class Slider {
   }
 
   /**
+   * Navigate slider forwards or backwards
+   * @param {HTMLElement} el - Element from which to begin traversal
+   * @param {boolean} forward - Navigate forward?
+   */
+  navigate (el, forward = true) {
+    // Load slider state
+    this.loadState(el)
+
+    // Update state
+    if (forward) this.state.index++
+    else this.state.index--
+
+    // Set state
+    this.setState()
+  }
+
+  /**
+   * Get swiping distance percent
+   * @return {number}
+   */
+  swipingDistancePercentage () {
+    return this.state.swipingDistance / this.state.width * 100
+  }
+
+  /**
    * Click listener
    * @param {MouseEvent} e - Click event
    */
@@ -124,12 +163,65 @@ export class Slider {
     // Prevent default click
     e.preventDefault()
 
+    // Navigate
+    this.navigate(e.target, nextClick)
+  }
+
+  /**
+   * Touchstart listener
+   * @param {TouchEvent} e - Touchstart event
+   */
+  touchStart (e) {
+    // Not a single touch
+    if (e.touches.length !== 1) return
+
+    // Not a [data-slider] touch
+    if (!e.target.matches(`[${this.config.attr}], [${this.config.attr}] *`)) return
+
     // Load slider state
     this.loadState(e.target)
 
+    // Record starting x position
+    this.state.start = e.touches[0].screenX
+
+    // Swiping
+    this.state.swiping = true
+
+    // Set state
+    this.setState()
+  }
+
+  /**
+   * Touchmove listener
+   * @param {TouchEvent} e - Touchmove event
+   */
+  touchMove (e) {
+    // Not a single touch
+    if (e.touches.length !== 1) return
+
+    // Not swiping
+    if (!this.state.swiping) return
+
     // Update state
-    if (prevClick) this.state.index--
-    else this.state.index++
+    this.state.swipingDistance = e.touches[0].screenX - this.state.start
+
+    // Set state
+    this.setState()
+  }
+
+  /**
+   * Touchend listener
+   * @param {TouchEvent} e - Touchend event
+   */
+  touchEnd (e) {
+    // Swipe
+    const distance = this.swipingDistancePercentage()
+    if (distance <= this.config.threshold * -1) this.navigate(this.state.sliderContainer, true)
+    else if (distance >= this.config.threshold) this.navigate(this.state.sliderContainer, false)
+
+    // Update state
+    this.state.swiping = false
+    this.state.swipingDistance = 0
 
     // Set state
     this.setState()
@@ -143,6 +235,7 @@ export class Slider {
  * @property {OnSlide} onSlide - Called on each slide change
  * @property {string} slider - Selector for slider list element
  * @property {string} sliderContainer - Selector for slider outer container element
+ * @property {number} threshold - Swiping threshold in percent width
  */
 
 /**
@@ -152,6 +245,10 @@ export class Slider {
  * @property {number} length - Slide count
  * @property {HTMLElement} slider - Parent slider list element
  * @property {HTMLElement} sliderContainer - Slider outer container element
+ * @property {number} start - Starting touch x-axis screen position
+ * @property {boolean} swiping - Currently swiping slider?
+ * @property {number} swipingDistance - Current x-axis pixel distance in screen space from touch start
+ * @property {number} width - Pixel width of the slider component
  */
 
 /**
