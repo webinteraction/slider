@@ -53,6 +53,7 @@ export class Slider {
     document.addEventListener('touchstart', e => this.touchStart(e))
     document.addEventListener('touchmove', e => this.touchMove(e))
     document.addEventListener('touchend', e => this.touchEnd(e))
+    document.addEventListener('keydown', e => this.keydown(e))
   }
 
   /**
@@ -225,6 +226,21 @@ export class Slider {
 
     // Set state
     this.setState()
+  }
+
+  /**
+   * Keydown listener
+   * @param {KeyboardEvent} e - Keydown event
+   */
+  keydown (e) {
+    // Not focused in slider
+    if (!e.target.matches(`[${this.config.attr}] *`)) return
+
+    // Navigate slides on arrow left/right
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault()
+      this.navigate(e.target, e.key === 'ArrowRight')
+    }
   }
 }
 
